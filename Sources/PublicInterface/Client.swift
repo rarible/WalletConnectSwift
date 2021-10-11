@@ -324,7 +324,7 @@ public class Client: WalletConnect {
         }
     }
 
-    /// https://docs.walletconnect.org/json-rpc/ethereum#parameters-3
+    /// https://docs.walletconnect.org/json-rpc-api-methods/ethereum#parameters-4
     public struct Transaction: Encodable {
         var from: String
         var to: String?
@@ -333,6 +333,17 @@ public class Client: WalletConnect {
         var gasPrice: String?
         var value: String?
         var nonce: String?
+        var type: String?
+        var accessList: [AccessListItem]?
+        var chainId: String?
+        var maxPriorityFeePerGas: String?
+        var maxFeePerGas: String?
+
+        /// https://eips.ethereum.org/EIPS/eip-2930
+        public struct AccessListItem: Encodable {
+            var address: String
+            var storageKeys: [String]
+        }
 
         public init(from: String,
                     to: String?,
@@ -340,7 +351,12 @@ public class Client: WalletConnect {
                     gas: String?,
                     gasPrice: String?,
                     value: String?,
-                    nonce: String?) {
+                    nonce: String?,
+                    type: String?,
+                    accessList: [AccessListItem]?,
+                    chainId: String?,
+                    maxPriorityFeePerGas: String?,
+                    maxFeePerGas: String?) {
             self.from = from
             self.to = to
             self.data = data
@@ -348,6 +364,11 @@ public class Client: WalletConnect {
             self.gasPrice = gasPrice
             self.value = value
             self.nonce = nonce
+            self.type = type
+            self.accessList = accessList
+            self.chainId = chainId
+            self.maxPriorityFeePerGas = maxPriorityFeePerGas
+            self.maxFeePerGas = maxFeePerGas
         }
     }
 }
